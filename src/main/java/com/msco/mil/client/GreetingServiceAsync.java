@@ -14,8 +14,8 @@ public interface GreetingServiceAsync {
     void getDeployments(AsyncCallback<java.util.List<MyDeployment>> callback);
     
     void getProcessInstances(Integer status, AsyncCallback<java.util.List<com.msco.mil.shared.MyProcessInstance>> callback);
-    void getTasks(AsyncCallback<java.util.List<com.msco.mil.shared.Task>> callback);
-    void getActors(AsyncCallback<java.util.List<com.msco.mil.shared.Actor>> callback);
+    void getTasks(AsyncCallback<java.util.List<com.msco.mil.shared.MyTask>> callback);
+    void getActors(AsyncCallback<java.util.List<com.msco.mil.shared.MyActor>> callback);
     /**
      * GWT-RPC service asynchronous (client-side) interface
      * 

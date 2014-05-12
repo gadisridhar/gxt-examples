@@ -33,10 +33,10 @@ import org.kie.services.client.serialization.jaxb.impl.task.JaxbTaskSummaryListR
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.msco.mil.client.GreetingService;
-import com.msco.mil.shared.Actor;
+import com.msco.mil.shared.MyActor;
 import com.msco.mil.shared.MyDeployment;
 import com.msco.mil.shared.MyProcessInstance;
-import com.msco.mil.shared.Task;
+import com.msco.mil.shared.MyTask;
 
 
 /**
@@ -47,8 +47,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
     private List<MyDeployment> deploymentList = new ArrayList<MyDeployment>();
     private List<MyProcessInstance> activeProcessInstanceList = new ArrayList<MyProcessInstance>();
     private List<MyProcessInstance> completedProcessInstanceList = new ArrayList<MyProcessInstance>();
-    private List<Task> taskList = new ArrayList<Task>();
-    private List<Actor> actorList = new ArrayList<Actor>();
+    private List<MyTask> taskList = new ArrayList<MyTask>();
+    private List<MyActor> actorList = new ArrayList<MyActor>();
     JSONArray currentDeploymentArray = new JSONArray();
     int currentDeploymentIncrement = 0;
     
@@ -56,11 +56,11 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
     // LoggerFactory.getLogger(GreetingServiceImpl.class);
     public GreetingServiceImpl() {
         System.out.println("hello");
-        Actor actor = new Actor();
+        MyActor actor = new MyActor();
         actor.setName("krisv");
         actor.setColor("black");
         actorList.add(actor);
-        actor = new Actor();
+        actor = new MyActor();
         actor.setName("admin");
         actor.setColor("black");
         actorList.add(actor);
@@ -162,7 +162,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
                     if (response.getStatus() == 200) {
                         List<TaskSummary> ts = taskSummaryList.getResult();
                         for (TaskSummary s : ts) {
-                            Task task = new Task();
+                            MyTask task = new MyTask();
                             task.setCreatedOn(s.getCreatedOn());
                             task.setExpiration(s.getExpirationTime());
                             task.setId(s.getId());
@@ -394,11 +394,11 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
         return completedProcessInstanceList;
     }
     
-    public List<Task> getTasks() throws IllegalArgumentException {
+    public List<MyTask> getTasks() throws IllegalArgumentException {
         return taskList;
     }
     
-    public List<Actor> getActors() throws IllegalArgumentException {
+    public List<MyActor> getActors() throws IllegalArgumentException {
         return actorList;
     }
 }

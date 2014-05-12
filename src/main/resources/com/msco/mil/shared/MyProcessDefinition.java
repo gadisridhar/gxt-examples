@@ -3,7 +3,7 @@ package com.msco.mil.shared;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ProcessDefinition  implements Serializable {
+public class MyProcessDefinition  implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer key;
     private Long id;
@@ -15,7 +15,7 @@ public class ProcessDefinition  implements Serializable {
     private Date date = new Date();
     private static int COUNTER = 0;
     
-    public ProcessDefinition() {
+    public MyProcessDefinition() {
         this.key = Integer.valueOf(COUNTER++);
     }
     

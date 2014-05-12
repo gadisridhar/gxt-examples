@@ -4,14 +4,14 @@ import com.google.gwt.editor.client.Editor.Path;
 import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
-import com.msco.mil.shared.Actor;
+import com.msco.mil.shared.MyActor;
 
 
-public interface ActorProperties extends PropertyAccess<Actor> {
+public interface MyActorProperties extends PropertyAccess<MyActor> {
     @Path("key")
-    ModelKeyProvider<Actor> key();
+    ModelKeyProvider<MyActor> key();
     
-    ValueProvider<Actor, String> name();
+    ValueProvider<MyActor, String> name();
     
-    ValueProvider<Actor, String> color();
+    ValueProvider<MyActor, String> color();
 }

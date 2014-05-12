@@ -3,7 +3,7 @@ package com.msco.mil.shared;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Task implements Serializable {
+public class ThisTask implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer key;
     private Long id;
@@ -18,7 +18,7 @@ public class Task implements Serializable {
     private String action1;
     private static int COUNTER = 0;
     
-    public Task() {
+    public ThisTask() {
         this.setKey(Integer.valueOf(COUNTER++));
     }
 

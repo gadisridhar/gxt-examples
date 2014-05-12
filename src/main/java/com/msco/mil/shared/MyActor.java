@@ -3,14 +3,14 @@ package com.msco.mil.shared;
 import java.io.Serializable;
 
 
-public class Actor implements Serializable {
+public class MyActor implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer key;
     private String name;
     private String color;
     private static int COUNTER = 0;
     
-    public Actor() {
+    public MyActor() {
         this.key = Integer.valueOf(COUNTER++);
     }
     

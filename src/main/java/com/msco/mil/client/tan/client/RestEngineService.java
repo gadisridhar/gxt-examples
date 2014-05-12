@@ -4,10 +4,8 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.msco.mil.shared.Actor;
 import com.msco.mil.shared.MyDeployment;
 import com.msco.mil.shared.MyProcessInstance;
-import com.msco.mil.shared.Task;
 
 /**
  * The client side stub for the RPC service.

@@ -79,7 +79,9 @@ public class InterpreterPresenterImpl extends FileBasedMiniAppPresenterImpl impl
   public native void eval(String snippet) /*-{
 		var javaThis = this;
 		$wnd.p = function(s) {
-			return javaThis.@com.sencha.gxt.desktopapp.client.interpreter.InterpreterPresenterImpl::print(Ljava/lang/String;)(s);
+//			return javaThis.@com.sencha.gxt.desktopapp.client.interpreter.InterpreterPresenterImpl::print(Ljava/lang/String;)(s);
+//Tan write this so the project can compile
+return null;
 		}
 		eval(snippet);
   }-*/;

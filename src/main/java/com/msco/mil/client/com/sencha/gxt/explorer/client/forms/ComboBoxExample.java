@@ -128,14 +128,12 @@ public class ComboBoxExample implements IsWidget, EntryPoint {
    */
   private <T> void addHandlersForEventObservation(ComboBox<T> combo, final LabelProvider<T> labelProvider) {
     combo.addValueChangeHandler(new ValueChangeHandler<T>() {
-      @Override
       public void onValueChange(ValueChangeEvent<T> event) {
         Info.display("Value Changed", "New value: "
             + (event.getValue() == null ? "nothing" : labelProvider.getLabel(event.getValue()) + "!"));
       }
     });
     combo.addSelectionHandler(new SelectionHandler<T>() {
-      @Override
       public void onSelection(SelectionEvent<T> event) {
         Info.display("State Selected", "You selected "
             + (event.getSelectedItem() == null ? "nothing" : labelProvider.getLabel(event.getSelectedItem()) + "!"));

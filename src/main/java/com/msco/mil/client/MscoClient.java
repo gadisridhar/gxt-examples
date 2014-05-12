@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.msco.mil.shared.Actor;
-import com.msco.mil.shared.ActorProperties;
+import com.msco.mil.shared.MyActor;
+import com.msco.mil.shared.MyActorProperties;
 import com.msco.mil.shared.MyDeployment;
 import com.msco.mil.shared.MyDeploymentProperties;
-import com.msco.mil.shared.ProcessDefinition;
-import com.msco.mil.shared.ProcessDefinitionProperties;
+import com.msco.mil.shared.MyProcessDefinition;
+import com.msco.mil.shared.MyProcessDefinitionProperties;
 import com.msco.mil.shared.MyProcessInstance;
 import com.msco.mil.shared.MyProcessInstanceProperties;
-import com.msco.mil.shared.Task;
-import com.msco.mil.shared.TaskProperties;
+import com.msco.mil.shared.MyTask;
+import com.msco.mil.shared.MyTaskProperties;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
 import com.sencha.gxt.core.client.util.Margins;
@@ -74,22 +74,22 @@ public class MscoClient implements IsWidget, EntryPoint {
     private Widget widgetActors;
     private static final MyDeploymentProperties propsDeployment = GWT.create(MyDeploymentProperties.class);
     private static final MyProcessInstanceProperties propsProcessInstance = GWT.create(MyProcessInstanceProperties.class);
-    private static final TaskProperties propsTaskSummary = GWT.create(TaskProperties.class);
-    private static final ProcessDefinitionProperties propsProcessDefinition = GWT
-            .create(ProcessDefinitionProperties.class);
-    private static final ActorProperties propsActor = GWT.create(ActorProperties.class);
+    private static final MyTaskProperties propsTaskSummary = GWT.create(MyTaskProperties.class);
+    private static final MyProcessDefinitionProperties propsProcessDefinition = GWT
+            .create(MyProcessDefinitionProperties.class);
+    private static final MyActorProperties propsActor = GWT.create(MyActorProperties.class);
     private Grid<MyProcessInstance> gridProcessInstance = null;
     private Grid<MyDeployment> gridDeployments = null;
-    private Grid<Task> gridTaskSummary = null;
-    private Grid<ProcessDefinition> gridProcessDefinition = null;
-    private Grid<Actor> gridActor = null;
+    private Grid<MyTask> gridTaskSummary = null;
+    private Grid<MyProcessDefinition> gridProcessDefinition = null;
+    private Grid<MyActor> gridActor = null;
     private List<MyProcessInstance> activeProcessInstanceList = new ArrayList<MyProcessInstance>();
     private List<MyProcessInstance> completedProcessInstanceList = new ArrayList<MyProcessInstance>();
-    private List<Task> taskList = new ArrayList<Task>();
-    private List<ProcessDefinition> processDefinitionList = new ArrayList<ProcessDefinition>();
-    private List<Actor> actorList = new ArrayList<Actor>();
+    private List<MyTask> taskList = new ArrayList<MyTask>();
+    private List<MyProcessDefinition> processDefinitionList = new ArrayList<MyProcessDefinition>();
+    private List<MyActor> actorList = new ArrayList<MyActor>();
     private int currentProcessInstanceGrid = 0;
-    private ListStore<Actor> store = null;
+    private ListStore<MyActor> store = null;
     
     /**
      * This is the entry point method.
@@ -212,7 +212,7 @@ public class MscoClient implements IsWidget, EntryPoint {
             @Override
             public void render(Context context, String value, SafeHtmlBuilder sb) {
                 String style = "style='color: black'";
-                for (Actor actor : actorList) {
+                for (MyActor actor : actorList) {
                     if (actor.getName().equals(value)) {
                         style = "style='color: " + actor.getColor() + "'";
                         break;
@@ -268,23 +268,23 @@ public class MscoClient implements IsWidget, EntryPoint {
         contentPanel.addStyleName("margin-10");
         VerticalLayoutContainer con = new VerticalLayoutContainer();
         contentPanel.setWidget(con);
-        ColumnConfig<ProcessDefinition, Long> idCol = new ColumnConfig<ProcessDefinition, Long>(
+        ColumnConfig<MyProcessDefinition, Long> idCol = new ColumnConfig<MyProcessDefinition, Long>(
                 propsProcessDefinition.id(), 50, "Id");
-        ColumnConfig<ProcessDefinition, String> nameCol = new ColumnConfig<ProcessDefinition, String>(
+        ColumnConfig<MyProcessDefinition, String> nameCol = new ColumnConfig<MyProcessDefinition, String>(
                 propsProcessDefinition.name(), 50, "Name");
-        ColumnConfig<ProcessDefinition, String> initiatorCol = new ColumnConfig<ProcessDefinition, String>(
+        ColumnConfig<MyProcessDefinition, String> initiatorCol = new ColumnConfig<MyProcessDefinition, String>(
                 propsProcessDefinition.initiator(), 50, "Initiator");
-        ColumnConfig<ProcessDefinition, Date> dateCol = new ColumnConfig<ProcessDefinition, Date>(
+        ColumnConfig<MyProcessDefinition, Date> dateCol = new ColumnConfig<MyProcessDefinition, Date>(
                 propsProcessDefinition.date(), 100, "Start Date");
         dateCol.setCell(new DateCell(DateTimeFormat.getFormat("dd/MM/yyyy kk:mm")));
-        List<ColumnConfig<ProcessDefinition, ?>> l = new ArrayList<ColumnConfig<ProcessDefinition, ?>>();
+        List<ColumnConfig<MyProcessDefinition, ?>> l = new ArrayList<ColumnConfig<MyProcessDefinition, ?>>();
         l.add(idCol);
         l.add(nameCol);
         l.add(initiatorCol);
         l.add(dateCol);
-        ColumnModel<ProcessDefinition> cm = new ColumnModel<ProcessDefinition>(l);
-        ListStore<ProcessDefinition> store = new ListStore<ProcessDefinition>(propsProcessDefinition.key());
-        gridProcessDefinition = new Grid<ProcessDefinition>(store, cm);
+        ColumnModel<MyProcessDefinition> cm = new ColumnModel<MyProcessDefinition>(l);
+        ListStore<MyProcessDefinition> store = new ListStore<MyProcessDefinition>(propsProcessDefinition.key());
+        gridProcessDefinition = new Grid<MyProcessDefinition>(store, cm);
         gridProcessDefinition.getView().setStripeRows(true);
         gridProcessDefinition.getView().setColumnLines(true);
         gridProcessDefinition.setBorders(false);
@@ -299,27 +299,27 @@ public class MscoClient implements IsWidget, EntryPoint {
         contentPanel.addStyleName("margin-10");
         VerticalLayoutContainer con = new VerticalLayoutContainer();
         contentPanel.setWidget(con);
-        ColumnConfig<Task, Long> idCol = new ColumnConfig<Task, Long>(propsTaskSummary.id(), 50, "Id");
-        ColumnConfig<Task, String> nameCol = new ColumnConfig<Task, String>(propsTaskSummary.name(), 150, "Task");
-        ColumnConfig<Task, Integer> priorityCol = new ColumnConfig<Task, Integer>(propsTaskSummary.priority(), 50,
+        ColumnConfig<MyTask, Long> idCol = new ColumnConfig<MyTask, Long>(propsTaskSummary.id(), 50, "Id");
+        ColumnConfig<MyTask, String> nameCol = new ColumnConfig<MyTask, String>(propsTaskSummary.name(), 150, "Task");
+        ColumnConfig<MyTask, Integer> priorityCol = new ColumnConfig<MyTask, Integer>(propsTaskSummary.priority(), 50,
                 "Priority");
-        ColumnConfig<Task, String> statusCol = new ColumnConfig<Task, String>(propsTaskSummary.status(), 100, "Status");
-        ColumnConfig<Task, Date> createdOnCol = new ColumnConfig<Task, Date>(propsTaskSummary.createdOn(), 150,
+        ColumnConfig<MyTask, String> statusCol = new ColumnConfig<MyTask, String>(propsTaskSummary.status(), 100, "Status");
+        ColumnConfig<MyTask, Date> createdOnCol = new ColumnConfig<MyTask, Date>(propsTaskSummary.createdOn(), 150,
                 "Created On");
         createdOnCol.setCell(new DateCell(DateTimeFormat.getFormat("dd/MM/yyyy kk:mm")));
-        ColumnConfig<Task, Date> dueOnCol = new ColumnConfig<Task, Date>(propsTaskSummary.expiration(), 150, "Due On");
+        ColumnConfig<MyTask, Date> dueOnCol = new ColumnConfig<MyTask, Date>(propsTaskSummary.expiration(), 150, "Due On");
         dueOnCol.setCell(new DateCell(DateTimeFormat.getFormat("dd/MM/yyyy kk:mm")));
-        ColumnConfig<Task, String> ownerCol = new ColumnConfig<Task, String>(propsTaskSummary.owner(), 100, "Owner");
-        ColumnConfig<Task, String> parentCol = new ColumnConfig<Task, String>(propsTaskSummary.parentName(), 100,
+        ColumnConfig<MyTask, String> ownerCol = new ColumnConfig<MyTask, String>(propsTaskSummary.owner(), 100, "Owner");
+        ColumnConfig<MyTask, String> parentCol = new ColumnConfig<MyTask, String>(propsTaskSummary.parentName(), 100,
                 "Process Instance");
-        ColumnConfig<Task, String> deploymentCol = new ColumnConfig<Task, String>(propsTaskSummary.deployment(), 220,
+        ColumnConfig<MyTask, String> deploymentCol = new ColumnConfig<MyTask, String>(propsTaskSummary.deployment(), 220,
                 "Deployment");
-        ColumnConfig<Task, String> action1Col = new ColumnConfig<Task, String>(propsTaskSummary.action1(), 50, "Action");
+        ColumnConfig<MyTask, String> action1Col = new ColumnConfig<MyTask, String>(propsTaskSummary.action1(), 50, "Action");
         ownerCol.setCell(new AbstractCell<String>() {
             @Override
             public void render(Context context, String value, SafeHtmlBuilder sb) {
                 String style = "style='color: black'";
-                for (Actor actor : actorList) {
+                for (MyActor actor : actorList) {
                     if (actor.getName().equals(value)) {
                         style = "style='color: " + actor.getColor() + "'";
                         break;
@@ -341,7 +341,7 @@ public class MscoClient implements IsWidget, EntryPoint {
             public void onSelect(SelectEvent event) {
                 Context c = event.getContext();
                 int row = c.getIndex();
-                Task t = gridTaskSummary.getStore().get(row);
+                MyTask t = gridTaskSummary.getStore().get(row);
                 /*
                  * greetingService.undeploy(t.getIdentifier(), new
                  * AsyncCallback<String>() { public void onFailure(Throwable
@@ -353,7 +353,7 @@ public class MscoClient implements IsWidget, EntryPoint {
             }
         });
         action1Col.setCell((Cell<String>) buttonSkip);
-        List<ColumnConfig<Task, ?>> l = new ArrayList<ColumnConfig<Task, ?>>();
+        List<ColumnConfig<MyTask, ?>> l = new ArrayList<ColumnConfig<MyTask, ?>>();
         l.add(idCol);
         l.add(nameCol);
         l.add(priorityCol);
@@ -364,9 +364,9 @@ public class MscoClient implements IsWidget, EntryPoint {
         l.add(parentCol);
         l.add(deploymentCol);
         l.add(action1Col);
-        ColumnModel<Task> cm = new ColumnModel<Task>(l);
-        ListStore<Task> store = new ListStore<Task>(propsTaskSummary.key());
-        gridTaskSummary = new Grid<Task>(store, cm);
+        ColumnModel<MyTask> cm = new ColumnModel<MyTask>(l);
+        ListStore<MyTask> store = new ListStore<MyTask>(propsTaskSummary.key());
+        gridTaskSummary = new Grid<MyTask>(store, cm);
         gridTaskSummary.getView().setStripeRows(true);
         gridTaskSummary.getView().setColumnLines(true);
         gridTaskSummary.setBorders(false);
@@ -381,7 +381,7 @@ public class MscoClient implements IsWidget, EntryPoint {
         contentPanel.addStyleName("margin-10");
         VerticalLayoutContainer con = new VerticalLayoutContainer();
         contentPanel.setWidget(con);
-        ColumnConfig<Actor, String> nameCol = new ColumnConfig<Actor, String>(propsActor.name(), 50, "Name");
+        ColumnConfig<MyActor, String> nameCol = new ColumnConfig<MyActor, String>(propsActor.name(), 50, "Name");
         ListStore<String> lights = new ListStore<String>(new ModelKeyProvider<String>() {
             public String getKey(String item) {
                 return item;
@@ -391,7 +391,7 @@ public class MscoClient implements IsWidget, EntryPoint {
             @Override
             public void render(Context context, String value, SafeHtmlBuilder sb) {
                 String style = "style='color: black'";
-                for (Actor actor : actorList) {
+                for (MyActor actor : actorList) {
                     if (actor.getName().equals(value)) {
                         style = "style='color: " + actor.getColor() + "'";
                         break;
@@ -406,7 +406,7 @@ public class MscoClient implements IsWidget, EntryPoint {
         lights.add("green");
         lights.add("orange");
         SafeStyles fieldPaddingStyle = SafeStylesUtils.fromTrustedString("padding: 2px 3px;");
-        ColumnConfig<Actor, String> colorColumn = new ColumnConfig<Actor, String>(propsActor.color(), 100, "Color");
+        ColumnConfig<MyActor, String> colorColumn = new ColumnConfig<MyActor, String>(propsActor.color(), 100, "Color");
         colorColumn.setColumnTextStyle(fieldPaddingStyle);
         ComboBoxCell<String> colorCombo = new ComboBoxCell<String>(lights, new LabelProvider<String>() {
             public String getLabel(String item) {
@@ -416,8 +416,8 @@ public class MscoClient implements IsWidget, EntryPoint {
         colorCombo.addSelectionHandler(new SelectionHandler<String>() {
             public void onSelection(SelectionEvent<String> event) {
                 CellSelectionEvent<String> sel = (CellSelectionEvent<String>) event;
-                Actor p = store.get(sel.getContext().getIndex());
-                for (Actor r : actorList) {
+                MyActor p = store.get(sel.getContext().getIndex());
+                for (MyActor r : actorList) {
                     if (r.getName().equals(p.getName())) {
                         r.setColor(event.getSelectedItem());
                         gridActor.getView().refresh(false);
@@ -431,12 +431,12 @@ public class MscoClient implements IsWidget, EntryPoint {
         colorCombo.setForceSelection(true);
         colorColumn.setCell(colorCombo);
         colorCombo.setWidth(90);
-        List<ColumnConfig<Actor, ?>> l = new ArrayList<ColumnConfig<Actor, ?>>();
+        List<ColumnConfig<MyActor, ?>> l = new ArrayList<ColumnConfig<MyActor, ?>>();
         l.add(nameCol);
         l.add(colorColumn);
-        ColumnModel<Actor> cm = new ColumnModel<Actor>(l);
-        store = new ListStore<Actor>(propsActor.key());
-        gridActor = new Grid<Actor>(store, cm);
+        ColumnModel<MyActor> cm = new ColumnModel<MyActor>(l);
+        store = new ListStore<MyActor>(propsActor.key());
+        gridActor = new Grid<MyActor>(store, cm);
         gridActor.getView().setStripeRows(true);
         gridActor.getView().setColumnLines(true);
         gridActor.setBorders(false);
@@ -488,12 +488,12 @@ public class MscoClient implements IsWidget, EntryPoint {
          * simple = new SimpleContainer(); simple.add(conMain, new
          * MarginData(1));
          */
-        greetingService.getActors(new AsyncCallback<List<Actor>>() {
+        greetingService.getActors(new AsyncCallback<List<MyActor>>() {
             public void onFailure(Throwable caught) {
                 Window.alert("Network problem getting Deployments list");
             }
             
-            public void onSuccess(List<Actor> actors) {
+            public void onSuccess(List<MyActor> actors) {
                 // System.out.println("actorsize:" + actors.size());
                 actorList = actors;
                 gridActor.getStore().addAll(actorList);
@@ -566,12 +566,12 @@ public class MscoClient implements IsWidget, EntryPoint {
                 }
             }
         });
-        greetingService.getTasks(new AsyncCallback<List<Task>>() {
+        greetingService.getTasks(new AsyncCallback<List<MyTask>>() {
             public void onFailure(Throwable caught) {
                 Window.alert("Network problem getting Completed Process Instances list");
             }
             
-            public void onSuccess(List<Task> taskSummaryList) {
+            public void onSuccess(List<MyTask> taskSummaryList) {
                 taskList = taskSummaryList;
                 gridTaskSummary.getStore().replaceAll(taskList);
                 // System.out.println("taskList size:" + taskList.size());

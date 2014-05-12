@@ -28,7 +28,7 @@ public class RestEngineServiceImpl extends RemoteServiceServlet implements
 
 	public RestEngineServiceImpl() {
 		System.out
-				.println("Constructor RestEngineServiceImpl====================");
+				.println("Project gxt-example.Constructor RestEngineServiceImpl====================");
 
 		new Thread(new Runnable() {
 			public void run() {

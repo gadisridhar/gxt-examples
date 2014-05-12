@@ -56,9 +56,6 @@
 			<artifactId>json</artifactId>
 			<version>20140107</version>
 		</dependency>
-
-
-
 		<dependency>
 			<groupId>org.kie.remote</groupId>
 			<artifactId>kie-services-client</artifactId>
@@ -79,6 +76,12 @@
 			<artifactId>slf4j-simple</artifactId>
 			<version>1.6.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
@@ -103,7 +106,6 @@
 			<artifactId>uibinder-bridge</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-
 	</dependencies>
 	<repositories>
 		<repository>
@@ -163,15 +165,15 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 		</plugins>
 
 		<resources>
 			<resource>
-				<directory>${basedir}/src/main/java/com/msco</directory>
+				<directory>${basedir}/src/main/java</directory>
 			</resource>
 			<resource>
 				<directory>${basedir}/src/main/java/com/sencha</directory>
@@ -180,8 +182,6 @@
 				<directory>${basedir}/src/main/resources</directory>
 			</resource>
 		</resources>
-
-
 	</build>
 
 </project>
